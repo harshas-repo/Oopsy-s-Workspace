@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oopsy — App Map</title>
+<style>
+  :root{
+    --ink:#2b2b33; --paper:#fff7ec; --card:#fffdf6; --line:#e8d9c3;
+    --turquoise:#2fb8a6; --yellow:#ffc93c; --coral:#ff8a7a; --violet:#8b7ae8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--paper)}
+  header{padding:28px 20px 8px;max-width:960px;margin:0 auto}
+  h1{margin:0 0 4px;font-size:1.7rem}
+  h2{margin:34px 0 10px;font-size:1.15rem;border-bottom:3px solid var(--yellow);display:inline-block;padding-bottom:2px}
+  .sub{color:#6b6470;margin:0}
+  main{max-width:960px;margin:0 auto;padding:8px 20px 60px}
+  .card{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+  code{background:#f3ead9;border-radius:5px;padding:1px 5px;font-family:ui-monospace,Consolas,monospace;font-size:.86em}
+  .loop{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}
+  .step{flex:1 1 120px;border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff}
+  .step b{display:block;font-size:.9rem}
+  .step span{font-size:.75rem;color:#6b6470}
+  .step .k{color:var(--turquoise);font-weight:700}
+  .arrow{align-self:center;font-weight:700;color:var(--coral)}
+  table{border-collapse:collapse;width:100%;font-size:.9rem}
+  td,th{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:#f3ead9}
+  .tag{display:inline-block;border-radius:999px;padding:1px 9px;font-size:.72rem;font-weight:700;color:#fff}
+  .t-loop{background:var(--turquoise)} .t-eng{background:var(--violet)} .t-ui{background:var(--coral)} .t-asset{background:#c9a227}
+  ul{margin:8px 0 8px 20px;padding:0}
+  li{margin:4px 0}
+  .note{font-size:.85rem;color:#6b6470}
+</style>
+</head>
+<body>
+<header>
+  <h1>Oopsy — App Map</h1>
+  <p class="sub">Where everything lives in the finished proof of concept, and the two patterns worth reusing.</p>
+</header>
+<main>
+
+  <h2>The learning loop (the kernel)</h2>
+  <div class="card">
+    <p class="note">Every screen is one <code>session.step</code>. <code>src/App.tsx</code> renders the matching panel and is the only place steps change — always through <code>go()</code>, which asks <code>canTransition()</code> first so the loop can never skip the kernel.</p>
+    <div class="loop">
+      <div class="step"><b>intro</b><span>Oopsy greets you</span></div><span class="arrow">→</span>
+      <div class="step"><b>diagnostic</b><span>child answers <span class="k">1/2+1/3</span></span></div><span class="arrow">→</span>
+      <div class="step"><b>mirror</b><span>Oopsy shows <em>its</em> wrong work</span></div><span class="arrow">→</span>
+      <div class="step"><b>identify</b><span>child taps the wrong step</span></div><span class="arrow">→</span>
+      <div class="step"><b>teach-principle</b><span>pick the fixing rule</span></div><span class="arrow">→</span>
+      <div class="step"><b>teach-rebuild</b><span>rebuild with number tiles</span></div><span class="arrow">→</span>
+      <div class="step"><b>repair</b><span>wrong → fixed reveal</span></div><span class="arrow">→</span>
+      <div class="step"><b>transfer</b><span>new same-concept Q</span></div><span class="arrow">→</span>
+      <div class="step"><b>recheck</b><span>delayed, re-worded Q</span></div><span class="arrow">→</span>
+      <div class="step"><b>wrap</b><span>success summary</span></div>
+    </div>
+  </div>
+
+  <h2>File map</h2>
+  <div class="card">
+    <table>
+      <tr><th>Concern</th><th>File(s)</th><th>What it does</th></tr>
+      <tr><td><span class="tag t-loop">loop</span></td><td><code>src/App.tsx</code></td><td>Controller: <code>renderPanel()</code> switch, <code>go()</code>, per-step handlers, <code>say()</code> (caption + voice + flow gate).</td></tr>
+      <tr><td><span class="tag t-loop">loop</span></td><td><code>src/loop/machine.ts</code></td><td><code>canTransition()</code> — the guard table that makes illegal step jumps impossible.</td></tr>
+      <tr><td><span class="tag t-loop">loop</span></td><td><code>src/loop/session.ts</code></td><td><code>Session</code>/<code>Results</code> state, <code>bumpAttempt()</code>, <code>hintLevel()</code> (derived hint ladder).</td></tr>
+      <tr><td><span class="tag t-eng">engine</span></td><td><code>src/engine/fraction.ts</code><br><code>src/engine/detection.ts</code></td><td>Pure fraction math; <code>detectAnswer()</code> maps an answer deterministically to a misconception — no AI.</td></tr>
+      <tr><td><span class="tag t-eng">content</span></td><td><code>src/content/fractions.ts</code><br><code>src/content/lines.ts</code></td><td>Problems + the <code>OopsySolution</code> schema (moves, rebuild steps, principle, wrong value); captions + <code>voiceKey</code>s.</td></tr>
+      <tr><td><span class="tag t-ui">UI</span></td><td><code>components/FractionAnswer</code>, <code>NumberTiles</code>, <code>Notebook</code>, <code>PrincipleChoice</code>, <code>RebuildSteps</code>, <code>WrapSummary</code>, <code>Oopsy</code>, <code>AudioControls</code></td><td>One component per loop beat; <code>Oopsy</code> is the inline-SVG character with swappable expressions.</td></tr>
+      <tr><td><span class="tag t-ui">audio</span></td><td><code>src/audio/sound.ts</code></td><td>One voice line at a time (interrupt-and-replace), SFX, mute/volume, <code>whenVoiceIdle()</code> flow gate.</td></tr>
+      <tr><td><span class="tag t-ui">look</span></td><td><code>src/styles/tokens.css</code>, <code>src/motion/presets.ts</code></td><td>Design tokens (Workshop palette/typography) and Framer Motion presets.</td></tr>
+      <tr><td><span class="tag t-asset">assets</span></td><td><code>tools/gen_voice.py</code>, <code>tools/gen_sfx.py</code>, <code>public/audio/**</code>, <code>public/art/workshop-bg.png</code>, <code>public/favicon.svg</code></td><td>Asset-time generation (Piper voice bank + procedural SFX) and the shipped art. Nothing AI at runtime.</td></tr>
+    </table>
+  </div>
+
+  <h2>How a child's answer becomes feedback (data flow)</h2>
+  <div class="card">
+    <ul>
+      <li><code>NumberTiles</code> → <code>FractionAnswer.check()</code> builds <code>{n,d}</code>.</li>
+      <li><code>detectAnswer(problem,{n,d})</code> → <code>DetectionResult</code> (<code>correct</code> / <code>misconception</code> / <code>other</code> / <code>invalid</code>) — a plain lookup, fully unit-tested.</li>
+      <li><code>App</code> handler switches on the result: sets expression, speaks the matching <code>lines.*</code> line, and (for auto-transitions) waits for the line to finish before <code>go()</code>.</li>
+      <li>Captions always mirror the spoken line, so the whole loop works with sound off.</li>
+    </ul>
+  </div>
+
+  <h2>Reuse these two patterns</h2>
+  <div class="card">
+    <ul>
+      <li><b>Guarded state machine.</b> Keep every screen in one enum, render with a switch, and route <em>all</em> transitions through a <code>canTransition()</code> table (<code>machine.ts</code>). It makes "impossible" navigation a compile-time/test-time error instead of a runtime bug. Reuse for any wizard, onboarding, or multi-step flow.</li>
+      <li><b>Deterministic validation without AI.</b> Constrain the input (bounded tiles), then map it to a known category with a pure function + tests (<code>detection.ts</code>). Reuse whenever you'd otherwise reach for an LLM to judge a short, structured answer.</li>
+    </ul>
+  </div>
+
+  <h2>Run it</h2>
+  <div class="card">
+    <p class="note"><code>npm install</code> → <code>npm run dev</code> (or <code>npm run build &amp;&amp; npm run preview</code>). Tests: <code>npm run test</code>. Voice/SFX are pre-generated; regenerate with <code>tools/gen_voice.py</code> / <code>tools/gen_sfx.py</code> (needs the local <code>.venv</code> + Piper model, never shipped).</p>
+  </div>
+
+</main>
+</body>
+</html>

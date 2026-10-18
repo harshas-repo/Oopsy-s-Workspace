@@ -1,0 +1,752 @@
+/* Design tokens — seeded palette now; full Workshop identity lands in Slice 6.
+   Spec ref: spec.md > Look and Feel. */
+
+:root {
+  /* Palette: warm background with bold accents. */
+  --color-turquoise: #2ec4b6;
+  --color-yellow: #ffd23f;
+  --color-coral: #ff6b6b;
+  --color-orange: #ff9f1c;
+  --color-violet: #8b5cf6;
+  --color-ink: #2b2140;
+  --color-cream: #fff7ec;
+
+  --font-display: 'Fredoka', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-cream);
+}
+
+/* --- Slice 1 placeholder layout (replaced by the Workshop identity in Slice 6) --- */
+.scene {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.scene__title {
+  font-family: var(--font-display);
+  color: var(--color-violet);
+}
+
+.scene__prompt {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.tile-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.tile-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.tile-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.tile {
+  min-width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-ink);
+  background: #fff;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.tile--selected {
+  background: var(--color-yellow);
+}
+
+.answer__bar {
+  height: 3px;
+  background: var(--color-ink);
+  margin: var(--space-2) 0;
+}
+
+.answer__preview {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.check-btn {
+  align-self: flex-start;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  border: none;
+  background: var(--color-turquoise);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.feedback {
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  background: #fff;
+  border-left: 6px solid var(--color-coral);
+}
+
+.feedback__caption {
+  margin: var(--space-1) 0 0;
+}
+
+/* --- Slice 2 placeholder layout: stage, notebook, Oopsy, caption --- */
+.stage {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.stage__panel {
+  flex: 1 1 320px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.panel__lead {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.panel__note {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.panel__oopsy-line {
+  font-family: var(--font-display);
+  color: var(--color-violet);
+  font-weight: 600;
+}
+
+.primary-btn {
+  align-self: flex-start;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  border: none;
+  background: var(--color-orange);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.answer__prompt {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.answer__hint {
+  color: var(--color-coral);
+  font-weight: 700;
+}
+
+/* Oopsy placeholder */
+.oopsy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.oopsy__body {
+  fill: var(--color-turquoise);
+  stroke: var(--color-ink);
+  stroke-width: 3;
+}
+
+.oopsy__eye {
+  fill: var(--color-ink);
+}
+
+.oopsy__mouth {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.oopsy__tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+}
+
+/* Notebook + tappable moves */
+.notebook {
+  background: #fff;
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.notebook__prompt {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.notebook__moves {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.move {
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  background: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.move:disabled {
+  cursor: default;
+}
+
+.move--miss {
+  border-color: var(--color-yellow);
+}
+
+.move--wrong {
+  border-color: var(--color-coral);
+  background: #ffe3e3;
+}
+
+.notebook__found {
+  font-weight: 700;
+  color: var(--color-coral);
+  margin: 0;
+}
+
+/* Caption bar */
+.caption {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 1.05rem;
+  min-height: 2.5rem;
+}
+
+/* Progress strip (becomes the Wrap summary in Slice 4) */
+.progress {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  font-size: 0.8rem;
+}
+
+.progress__item {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-ink);
+  opacity: 0.5;
+}
+
+.progress__item--done {
+  background: var(--color-turquoise);
+  color: #fff;
+  border-color: var(--color-turquoise);
+  opacity: 1;
+}
+
+/* --- Slice 3 placeholder: teach (principle + rebuild), hints, repair --- */
+.principle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.principle__prompt {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.principle__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.principle__opt {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border: 2px solid var(--color-ink);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.principle__opt:hover {
+  background: var(--color-yellow);
+}
+
+.rebuild__intro {
+  font-weight: 700;
+}
+
+.rebuild__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.step {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+}
+
+.step__label {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.step--active {
+  border-color: var(--color-turquoise);
+  background: #fff;
+}
+
+.step--solved .step__label {
+  color: var(--color-turquoise);
+}
+
+.step--locked {
+  opacity: 0.45;
+}
+
+.step__input {
+  margin-top: var(--space-2);
+}
+
+.step__miss {
+  color: var(--color-coral);
+  font-weight: 700;
+  margin: var(--space-1) 0 0;
+}
+
+.hint {
+  margin: var(--space-1) 0 0;
+  padding: var(--space-2);
+  border-left: 4px solid var(--color-yellow);
+  background: #fff8e1;
+  font-size: 0.95rem;
+}
+
+.hint--model {
+  border-left-color: var(--color-violet);
+  background: #f1ebff;
+}
+
+.repair {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.repair__wrong {
+  color: var(--color-coral);
+  text-decoration: line-through;
+}
+
+.repair__fixed {
+  color: var(--color-turquoise);
+}
+
+/* --- Slice 4 placeholder: delayed re-check banner + Wrap summary --- */
+.panel__later {
+  font-style: italic;
+  opacity: 0.8;
+  border-left: 4px solid var(--color-violet);
+  padding-left: var(--space-2);
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wrap__title {
+  font-family: var(--font-display);
+  color: var(--color-violet);
+  margin: 0;
+}
+
+.wrap__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.wrap__item {
+  display: flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  background: #fff;
+  border: 2px solid transparent;
+  opacity: 0.6;
+}
+
+.wrap__item--done {
+  border-color: var(--color-turquoise);
+  opacity: 1;
+}
+
+.wrap__mark {
+  font-weight: 800;
+  color: var(--color-turquoise);
+}
+
+.wrap__note {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  border-top: 1px dashed var(--color-ink);
+  padding-top: var(--space-2);
+}
+
+/* ============ Slice 6 — Workshop identity ============
+   The illustrated Workshop world + tactile paper/wood surfaces, layered after
+   the placeholder rules so it wins the cascade without touching markup.
+   Spec ref: spec.md > Look and Feel. */
+
+:root {
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --paper: #fffdf6;
+  --ink-line: #2b2140;
+  --shadow-card: 0 12px 28px rgba(43, 33, 64, 0.22);
+  --shadow-hard: 0 4px 0 var(--ink-line);
+}
+
+/* Illustrated Workshop world behind everything. */
+body {
+  background: var(--color-cream) url('/art/workshop-bg.png') center / cover no-repeat fixed;
+}
+
+.scene {
+  max-width: 1080px;
+  min-height: 100svh;
+  padding: clamp(16px, 4vw, 44px);
+  gap: var(--space-4);
+}
+
+/* Hanging sign for the title. */
+.scene__title {
+  align-self: center;
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: var(--color-ink);
+  background: var(--color-yellow);
+  border: 3px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-hard);
+  transform: rotate(-2deg);
+}
+
+/* Oopsy stands beside the workbench panel. */
+.stage {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(16px, 4vw, 40px);
+}
+
+.oopsy svg {
+  width: clamp(130px, 24vw, 240px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 14px rgba(43, 33, 64, 0.28));
+}
+
+/* The workbench paper card, taped to the bench. */
+.panel {
+  background: var(--paper);
+  border: 3px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+  position: relative;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  width: 104px;
+  height: 26px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(255, 210, 63, 0.9);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(43, 33, 64, 0.2);
+}
+
+/* Notebook reads as a ruled sheet inside the card, not a second card. */
+.notebook {
+  background: repeating-linear-gradient(#fff, #fff 30px, #eef3f7 31px);
+  border: 2px dashed var(--ink-line);
+  border-radius: var(--radius);
+  box-shadow: none;
+}
+
+/* Tactile chunky controls. */
+.primary-btn,
+.check-btn {
+  border: 3px solid var(--ink-line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-hard);
+  font-weight: 700;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.primary-btn {
+  background: var(--color-orange);
+}
+
+.check-btn {
+  background: var(--color-turquoise);
+}
+
+.primary-btn:active,
+.check-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink-line);
+}
+
+.tile {
+  border: 3px solid var(--ink-line);
+  border-radius: 12px;
+  box-shadow: 0 3px 0 var(--ink-line);
+  font-weight: 700;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.tile--selected {
+  background: var(--color-yellow);
+  transform: translateY(-2px);
+}
+
+.principle__opt,
+.move {
+  border: 3px solid var(--ink-line);
+  border-radius: var(--radius);
+  box-shadow: 0 3px 0 var(--ink-line);
+  background: #fff;
+  font-weight: 600;
+}
+
+/* Keep the miss/wrong accents above the shared control border. */
+.move--miss {
+  border-color: var(--color-yellow);
+}
+
+.move--wrong {
+  border-color: var(--color-coral);
+  background: #ffe3e3;
+}
+
+.principle__opt:hover,
+.move:hover:not(:disabled) {
+  background: var(--color-yellow);
+}
+
+/* Caption as a readable plaque over the busy art. */
+.caption {
+  background: rgba(43, 33, 64, 0.94);
+  border: 3px solid var(--ink-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  font-weight: 600;
+}
+
+/* Progress pills on paper tags. */
+.progress__item {
+  background: rgba(255, 253, 246, 0.92);
+  border: 2px solid var(--ink-line);
+  font-weight: 700;
+}
+
+.progress__item--done {
+  background: var(--color-turquoise);
+  color: #fff;
+}
+
+/* Wrap rows stay light inside the card. */
+.wrap__item {
+  background: #fff;
+  border: 2px solid var(--ink-line);
+}
+
+.wrap__item--done {
+  border-color: var(--color-turquoise);
+  background: #e9fbf7;
+}
+
+@media (max-width: 640px) {
+  .stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-btn,
+  .check-btn,
+  .tile {
+    transition: none;
+  }
+}
+
+/* --- Slice 9 — audio controls (mute + volume) --- */
+.scene {
+  position: relative;
+}
+
+.audio-controls {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  background: rgba(255, 253, 246, 0.92);
+  border: 2px solid var(--ink-line);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-hard);
+}
+
+.audio-controls__mute {
+  border: none;
+  background: var(--color-turquoise);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.audio-controls__vol {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.audio-controls__vol input {
+  width: 90px;
+}
+
+@media (max-width: 640px) {
+  .audio-controls {
+    position: static;
+    align-self: center;
+    margin-top: var(--space-1);
+  }
+}
+
+/* --- Slice 10 — exit-to-home control (visible during an active session) --- */
+.exit-btn {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--ink-line);
+  background: var(--color-coral);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding: 2px 12px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-hard);
+  cursor: pointer;
+}
+
+.exit-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--ink-line);
+}
+
+@media (max-width: 640px) {
+  .exit-btn {
+    position: static;
+    align-self: flex-start;
+    margin-top: var(--space-1);
+  }
+}

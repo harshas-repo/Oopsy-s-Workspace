@@ -1,0 +1,55 @@
+# Devpost Learn — keep personal learning context out of commits by default.
+# (This keeps it out of git, not out of your AI provider's conversation.)
+/devpost/learner-profile.md
+
+# Devpost Learn curriculum scaffolding — course material, not the project.
+# Kept out of the repo so the public submission is just the app + devpost docs.
+/.agents/
+/.claude/
+/agent/
+/skills-lock.json
+
+# Local credentials / secrets — never commit these.
+.env
+.env.*
+!.env.example
+
+# Node / Vite build artifacts and dependencies
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.local
+.vercel/
+
+# Python venv + Piper model weights (large, regenerable via tools/gen_voice.py)
+.venv/
+tools/piper-models/
+
+# Vercel deploy helper scripts/logs (regenerable via the vercel-deploy skill)
+.vercel-tmp/
+
+# Local verification screenshots (not part of the app)
+screenshot-*.png
+/*.png
+
+# Superseded / non-shipping voice artifacts (female-only amy bank is canonical)
+public/audio/voice/en_US-joe-medium/
+public/audio/voice/en_US-amy-medium/mirror.wav
+public/audio/voice/en_US-amy-medium/repair.wav
+
+# Editor / IDE local state
+.qoder/
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+.vercel
+.env*
