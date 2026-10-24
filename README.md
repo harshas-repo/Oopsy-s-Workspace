@@ -8,6 +8,8 @@ persistence. Oopsy's voice is pre-generated with [Piper](https://github.com/rhas
 (asset-time only), and every spoken line has a caption, so the whole loop is playable with
 sound off.
 
+**Live demo:** <https://oopsy-phi.vercel.app>
+
 ## Screenshots
 
 | The Workshop opens | The diagnostic |
@@ -109,29 +111,3 @@ python -m piper.download_voices en_US-amy-medium --data-dir tools/piper-models
 .venv\Scripts\python tools/gen_sfx.py          # writes public/audio/sfx/...
 ```
 
-## Deployment (Vercel)
-
-The app is a static Vite build and deploys to Vercel with zero config — Vercel
-auto-detects the Vite preset (build `vite build`, output `dist`).
-
-```bash
-npm install -g vercel
-vercel login
-vercel link --yes --project oopsy   # first time only; project name must be lowercase
-vercel --prod --yes                 # build in the cloud + deploy to production
-```
-
-Live URL: **https://oopsy-phi.vercel.app**
-
-> **Note on public access:** new Vercel projects enable *Deployment Protection (Vercel
-> Authentication)* by default, which gates the URL behind a Vercel login. To make the demo
-> publicly viewable, turn it off in the Vercel dashboard:
-> **Project → Settings → Deployment Protection → disable "Vercel Authentication"** for the
-> production deployment.
-
-## Recording a demo video
-
-1. Run `npm run dev` (or open the live URL once Deployment Protection is off).
-2. Leave sound **on** so Oopsy's voice is captured, and play the intended demo path above
-   in one take (~1 minute).
-3. Optionally end on the Wrap summary to show all five recorded criteria.
